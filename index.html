@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<!-- =====================================================================
+     ABERTURA DO <head>
+     ===================================================================== -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Torra Certa | Café de especialidade orientado a dados</title>
+  <meta name="description" content="LP pedagógica de exemplo com dataLayer padronizado (evento clique).">
+
+  <!-- ===================================================================
+       >>> INÍCIO DO ESPAÇO RESERVADO: SNIPPET GTM (HEAD) <<<
+       Cole aqui o primeiro snippet do Google Tag Manager (<script>…</script>).
+       Ele deve ficar o mais alto possível dentro do <head>.
+       >>> FIM DO ESPAÇO RESERVADO: SNIPPET GTM (HEAD) <<<
+       =================================================================== -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- Design tokens (inspirados na identidade DP6: azuis, limpo, tech) ---------- */
+    :root {
+      --navy: #0A1F44;
+      --blue: #1F5BFF;
+      --cyan: #00C2FF;
+      --ice: #F2F6FD;
+      --ink: #14213D;
+      --muted: #5B6B8C;
+      --line: #DCE5F5;
+      --white: #FFFFFF;
+      --radius: 12px;
+      --font: "Poppins", "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--ink); background: var(--white); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    :focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
+    .wrap { width: min(1120px, 92%); margin-inline: auto; }
+
+    /* ---------- Botões ---------- */
+    .btn {
+      display: inline-block; border: 0; cursor: pointer; font: 600 1rem var(--font);
+      padding: .85rem 1.6rem; border-radius: 999px; transition: background .2s, transform .2s;
+    }
+    .btn-primary { background: var(--blue); color: var(--white); }
+    .btn-primary:hover { background: #1448CC; }
+    .btn-ghost { border: 2px solid var(--cyan); color: var(--white); background: transparent; }
+    .btn-ghost:hover { background: rgba(0,194,255,.15); }
+    .btn-sm { padding: .5rem 1.2rem; font-size: .9rem; }
+
+    /* ---------- Header ---------- */
+    .site-header { background: var(--navy); color: var(--white); position: sticky; top: 0; z-index: 10; }
+    .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1rem; }
+    .logo { font-weight: 700; font-size: 1.35rem; letter-spacing: -.02em; }
+    .logo span { color: var(--cyan); }
+    .nav { display: flex; align-items: center; gap: 1.5rem; }
+    .nav a:not(.btn) { opacity: .85; font-size: .95rem; }
+    .nav a:not(.btn):hover { opacity: 1; color: var(--cyan); }
+
+    /* ---------- Hero ---------- */
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, #0F3A9E 100%); color: var(--white); padding: 5rem 0; }
+    .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 3rem; align-items: center; }
+    .hero h1 { font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.15; letter-spacing: -.02em; margin-bottom: 1rem; }
+    .hero p { color: #C9D8F5; max-width: 52ch; margin-bottom: 2rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* Formulário */
+    .card { background: var(--white); color: var(--ink); border-radius: var(--radius); padding: 2rem; box-shadow: 0 20px 50px rgba(0,0,0,.25); }
+    .card h2 { font-size: 1.3rem; margin-bottom: .25rem; }
+    .card .sub { color: var(--muted); font-size: .9rem; margin-bottom: 1.25rem; }
+    .field { margin-bottom: 1rem; }
+    .field label { display: block; font-size: .85rem; font-weight: 500; margin-bottom: .3rem; }
+    .field input { width: 100%; padding: .75rem .9rem; border: 1.5px solid var(--line); border-radius: 8px; font: 1rem var(--font); }
+    .field input:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 3px rgba(31,91,255,.2); }
+    .field.invalid input { border-color: #D93025; }
+    .error { color: #D93025; font-size: .8rem; margin-top: .25rem; display: none; }
+    .field.invalid .error { display: block; }
+    .card .btn { width: 100%; }
+    .success { display: none; background: #E6F6EC; color: #14672F; padding: .9rem; border-radius: 8px; margin-top: 1rem; font-size: .9rem; }
+
+    /* ---------- Serviços ---------- */
+    .section { padding: 5rem 0; }
+    .section.alt { background: var(--ice); }
+    .section h2.title { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -.01em; color: var(--navy); margin-bottom: .5rem; }
+    .section .lead { color: var(--muted); max-width: 60ch; margin-bottom: 2.5rem; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .item { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.75rem; border-top: 4px solid var(--blue); }
+    .item:nth-child(2) { border-top-color: var(--cyan); }
+    .item h3 { color: var(--navy); font-size: 1.1rem; margin-bottom: .5rem; }
+    .item p { color: var(--muted); font-size: .95rem; margin-bottom: 1rem; }
+    .item a { color: var(--blue); font-weight: 600; font-size: .95rem; }
+    .item a:hover { text-decoration: underline; }
+
+    /* ---------- Footer ---------- */
+    .site-footer { background: var(--navy); color: #C9D8F5; padding: 3rem 0 2rem; }
+    .site-footer .wrap { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; align-items: center; }
+    .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .footer-links a:hover { color: var(--cyan); }
+    .copy { width: 100%; border-top: 1px solid rgba(255,255,255,.12); padding-top: 1.25rem; font-size: .85rem; }
+
+    /* ---------- Responsivo ---------- */
+    @media (max-width: 860px) {
+      .hero .wrap, .grid { grid-template-columns: 1fr; }
+      .hero { padding: 3rem 0; }
+      .nav a:not(.btn) { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+  </style>
+</head>
+<!-- =====================================================================
+     FECHAMENTO DO </head>
+     ===================================================================== -->
+
+
+<!-- =====================================================================
+     ABERTURA DO <body>
+     ===================================================================== -->
+<body>
+
+  <!-- ===================================================================
+       >>> INÍCIO DO ESPAÇO RESERVADO: SNIPPET GTM (BODY / <noscript>) <<<
+       Cole aqui o snippet <noscript><iframe …></iframe></noscript> do GTM,
+       imediatamente após a abertura da tag <body>.
+       >>> FIM DO ESPAÇO RESERVADO: SNIPPET GTM (BODY / <noscript>) <<<
+       =================================================================== -->
+
+  <!-- ABERTURA DO <header> (elemento visual da página, não confundir com <head>) -->
+  <header class="site-header">
+    <div class="wrap">
+      <a href="#topo" class="logo" data-track-type="link-header" data-track-title="logo torra certa">Torra<span>Certa</span></a>
+      <nav class="nav" aria-label="Principal">
+        <a href="#servicos" data-track-type="link-header" data-track-title="menu servicos">Serviços</a>
+        <a href="#diferenciais" data-track-type="link-header" data-track-title="menu diferenciais">Diferenciais</a>
+        <a href="#cadastro" class="btn btn-primary btn-sm" data-track-type="botao-header" data-track-title="quero receber a amostra">Quero uma amostra</a>
+      </nav>
+    </div>
+  </header>
+  <!-- FECHAMENTO DO </header> -->
+
+  <main id="topo">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <h1>Café de especialidade, torrado com precisão de laboratório</h1>
+          <p>Medimos temperatura, umidade e tempo de cada lote para entregar a mesma xícara perfeita, todo mês, na sua porta.</p>
+          <div class="hero-actions">
+            <a href="#cadastro" class="btn btn-primary" data-track-type="botao" data-track-title="receber amostra gratis">Receber amostra grátis</a>
+            <a href="#servicos" class="btn btn-ghost" data-track-type="botao" data-track-title="conhecer os planos">Conhecer os planos</a>
+          </div>
+        </div>
+
+        <!-- FORMULÁRIO DE LEADS -->
+        <div class="card" id="cadastro">
+          <h2>Peça sua amostra</h2>
+          <p class="sub">Preencha os três campos e enviamos 100 g do nosso lote atual.</p>
+
+          <!-- novalidate: a validação é feita via JS para controlar quando o dataLayer dispara -->
+          <form id="lead-form" novalidate>
+            <div class="field">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" autocomplete="name" placeholder="Seu nome">
+              <div class="error">Informe seu nome.</div>
+            </div>
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="voce@empresa.com">
+              <div class="error">Informe um e-mail válido.</div>
+            </div>
+            <div class="field">
+              <label for="cargo">Cargo / Empresa</label>
+              <input type="text" id="cargo" name="cargo" autocomplete="organization-title" placeholder="Ex.: Gerente, Café Central">
+              <div class="error">Informe seu cargo ou empresa.</div>
+            </div>
+            <!-- data-track-ignore-click: o botão de envio NÃO dispara no clique (ver JS), só no submit válido -->
+            <button type="submit" class="btn btn-primary" data-track-type="submit" data-track-title="enviar formulario lead" data-track-ignore-click>Enviar</button>
+            <div class="success" id="form-success" role="status">Recebemos seus dados. Em breve você recebe um e-mail.</div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section class="section" id="servicos">
+      <div class="wrap">
+        <h2 class="title">Como você pode comprar</h2>
+        <p class="lead">Três formas de receber café fresco, sempre com o perfil de torra que você escolheu.</p>
+        <div class="grid">
+          <article class="item">
+            <h3>Assinatura mensal</h3>
+            <p>Receba 250 g ou 1 kg todo mês, com pausa e troca de perfil quando quiser.</p>
+            <a href="#cadastro" data-track-type="link" data-track-title="saiba mais assinatura mensal">Saiba mais</a>
+          </article>
+          <article class="item">
+            <h3>Kit degustação</h3>
+            <p>Quatro origens em porções de 50 g para descobrir seu perfil de sabor.</p>
+            <a href="#cadastro" data-track-type="link" data-track-title="saiba mais kit degustacao">Saiba mais</a>
+          </article>
+          <article class="item">
+            <h3>Café para empresas</h3>
+            <p>Fornecimento recorrente para escritórios, com relatório de consumo por unidade.</p>
+            <a href="#cadastro" data-track-type="link" data-track-title="saiba mais cafe para empresas">Saiba mais</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIFERENCIAIS -->
+    <section class="section alt" id="diferenciais">
+      <div class="wrap">
+        <h2 class="title">Por que a Torra Certa é diferente</h2>
+        <p class="lead">Cada lote tem dados registrados e rastreáveis, do grão à embalagem.</p>
+        <div class="grid">
+          <article class="item">
+            <h3>Curva de torra registrada</h3>
+            <p>Sensores gravam a temperatura a cada segundo. Repetimos a curva que deu certo.</p>
+          </article>
+          <article class="item">
+            <h3>Origem rastreável</h3>
+            <p>O QR code da embalagem mostra a fazenda, a altitude e a data da colheita.</p>
+          </article>
+          <article class="item">
+            <h3>Frescor garantido</h3>
+            <p>Torramos após o seu pedido e enviamos em até 48 horas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <a href="#topo" class="logo" data-track-type="link-footer" data-track-title="logo torra certa">Torra<span>Certa</span></a>
+      <nav class="footer-links" aria-label="Rodapé">
+        <a href="#servicos" data-track-type="link-footer" data-track-title="rodape servicos">Serviços</a>
+        <a href="#diferenciais" data-track-type="link-footer" data-track-title="rodape diferenciais">Diferenciais</a>
+        <a href="#" data-track-type="link-footer" data-track-title="politica de privacidade">Política de privacidade</a>
+        <a href="#" data-track-type="link-footer" data-track-title="instagram">Instagram</a>
+      </nav>
+      <a href="#cadastro" class="btn btn-primary btn-sm" data-track-type="botao-footer" data-track-title="peca sua amostra">Peça sua amostra</a>
+      <p class="copy">© 2026 Torra Certa. Página de exemplo para fins pedagógicos.</p>
+    </div>
+  </footer>
+
+
+  <!-- =====================================================================
+       JAVASCRIPT DO DATALAYER
+       Lógica geral:
+       1) Um único "ouvinte de clique" no document (event delegation) captura
+          qualquer <a> ou <button> da página, inclusive os criados depois.
+       2) Cada elemento informa o tipo e o nome via atributos opcionais:
+            data-track-type  -> custom_type  (ex.: botao-header, link, submit)
+            data-track-title -> custom_title (se ausente, usa o texto do elemento)
+          Se data-track-type não existir, o script deduz: <a> = "link", <button> = "botao".
+       3) O custom_section vem da constante PAGE_SECTION (nome da página).
+       4) TODOS os valores passam por sanitize() antes do push.
+       5) O envio do formulário é tratado à parte: o clique no botão "Enviar"
+          é ignorado (data-track-ignore-click) e o evento só dispara no evento
+          "submit" DEPOIS que todos os campos forem validados.
+       ===================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Garante que o dataLayer exista (o GTM também cria, mas não dependemos dele).
+      window.dataLayer = window.dataLayer || [];
+
+      // Nome da página onde os elementos estão (vai em custom_section).
+      var PAGE_SECTION = 'lp-home';
+
+      /**
+       * sanitize: padroniza qualquer texto para o dataLayer.
+       * Exemplo: "  Receber Amostra Grátis! " -> "receber-amostra-gratis"
+       *  1. converte para string e minúsculas
+       *  2. NFD separa letras e acentos; remove os acentos (U+0300–U+036F)
+       *  3. troca qualquer caractere que não seja a-z ou 0-9 por hífen
+       *     (isso também transforma espaços em hífen e remove símbolos)
+       *  4. colapsa hífens repetidos e remove hífens nas pontas
+       */
+      function sanitize(value) {
+        return String(value == null ? '' : value)
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/-{2,}/g, '-')
+          .replace(/^-+|-+$/g, '');
+      }
+
+      /**
+       * pushClique: monta e envia o evento no padrão exato exigido.
+       * Estrutura: event / custom_section / custom_type / custom_title
+       */
+      function pushClique(type, title) {
+        window.dataLayer.push({
+          'event': 'clique',
+          'custom_section': sanitize(PAGE_SECTION),
+          'custom_type': sanitize(type),
+          'custom_title': sanitize(title)
+        });
+      }
+
+      /**
+       * Clique em links e botões (event delegation).
+       * closest() sobe na árvore para funcionar mesmo se o clique for em um
+       * elemento interno (ex.: <span> dentro de um <a>).
+       */
+      document.addEventListener('click', function (e) {
+        var el = e.target.closest('a, button');
+        if (!el) return;
+
+        // O botão de envio do formulário não conta como clique: só dispara no submit válido.
+        if (el.hasAttribute('data-track-ignore-click')) return;
+
+        var tag = el.tagName.toLowerCase();
+        var type = el.getAttribute('data-track-type') || (tag === 'a' ? 'link' : 'botao');
+        var title = el.getAttribute('data-track-title') || el.textContent;
+
+        pushClique(type, title);
+      });
+
+      /**
+       * Envio do formulário.
+       * - preventDefault: evita recarregar a página (exemplo pedagógico).
+       * - Valida os 3 campos. Se QUALQUER um estiver vazio/inválido,
+       *   mostra o erro e RETORNA, sem fazer o push no dataLayer.
+       * - Somente com tudo preenchido o evento "clique" do tipo "submit" é enviado.
+       */
+      var form = document.getElementById('lead-form');
+      var success = document.getElementById('form-success');
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var allValid = true;
+
+        ['nome', 'email', 'cargo'].forEach(function (name) {
+          var input = form.elements[name];
+          var value = input.value.trim();
+          var ok = name === 'email' ? emailRegex.test(value) : value.length > 0;
+          input.closest('.field').classList.toggle('invalid', !ok);
+          if (!ok) allValid = false;
+        });
+
+        // Formulário incompleto: nenhum evento é enviado.
+        if (!allValid) {
+          var firstInvalid = form.querySelector('.field.invalid input');
+          if (firstInvalid) firstInvalid.focus();
+          success.style.display = 'none';
+          return;
+        }
+
+        // Formulário completo: dispara o evento de submit no padrão do projeto.
+        var btn = form.querySelector('button[type="submit"]');
+        pushClique(btn.getAttribute('data-track-type'), btn.getAttribute('data-track-title'));
+
+        success.style.display = 'block';
+        form.reset();
+      });
+    })();
+  </script>
+
+</body>
+<!-- FECHAMENTO DO </body> -->
+</html>
